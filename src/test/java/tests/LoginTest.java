@@ -1,13 +1,11 @@
+package tests;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
@@ -32,14 +30,24 @@ public class LoginTest extends BaseTest {
 
     }
     @Test
-    public void checkLoginEmptyPassword(){
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("");
-        driver.findElement(By.id("login-button")).click();
+    public void checkLoginWithEmptyPassword(){
+        loginPage.open();
+        loginPage.login("standard_user","");
+        assertEquals(loginPage.getErrorMessage(),"Epic sadface: Password is required", "SO BAAAD");
+    }
 
-        String title = driver.findElement(By.xpath("//h3[@data-test = 'error']")).getText();
-        Assert.assertEquals(title,"Epic sadface: Password is required");
-
+    @Test
+    public void checkLoginWithWrongPassword(){
+        loginPage.open();
+        loginPage.login("standard_user","1212121212121");
+        assertEquals(loginPage.getErrorMessage(),
+                "Epic sadface: Username and password do not match any user in this service",
+                "SO BAAAD");
+    }
+    @Test
+    public void checkSuccessLogin(){
+        loginPage.open();
+        loginPage.login("standard_user","secret_sauce");
+        assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 }
