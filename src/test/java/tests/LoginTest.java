@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -47,7 +48,23 @@ public class LoginTest extends BaseTest {
     @Test
     public void checkSuccessLogin(){
         loginPage.open();
-        loginPage.login("standard_user","secret_sauce");
+        loginPage.login("standard_user","secret_sauc");
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
+    }
+
+    @DataProvider(name = "негативные тесты для логина")
+    public Object[][] loginData(){
+        return new Object[][]{
+                {"standard_user","","Epic sadface: Password is required"},
+                {"standard_user","1212121212121","Epic sadface: Username and password do not match any user in this service"}
+        };
+    }
+    @Test(dataProvider = "негативные тесты для логина")
+    public void login(String user, String password,String message){
+        loginPage.open();
+        loginPage.login(user,password);
+        assertEquals(loginPage.getErrorMessage(),
+                message,
+                "SO BAAAD");
     }
 }

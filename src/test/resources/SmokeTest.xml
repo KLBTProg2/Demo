@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2"
+       name="SauceDemo Smoke Test"
+       parallel="tests">
+    <listeners>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name= "tests.RetryListener"/>
+    </listeners>
+
+    <test name="Thread #1">
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                   <include name = "checkLoginWithEmptyPassword"/>
+                    <exclude name="login"/>
+                </methods>
+            </class>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Thread #2">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="smoke"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+<!--            <class name="tests.CartTest"/>-->
+            <class name="tests.LocatorTest"/>
+        </classes>
+    </test>
+</suite>
