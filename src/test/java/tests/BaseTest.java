@@ -30,6 +30,7 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-extensions");
             options.addArguments("--disable-popup-blocking");
+            options.addArguments("--headless");
         }else if(browser.equalsIgnoreCase("edge")){
             driver = new EdgeDriver();
         }
@@ -45,6 +46,9 @@ public class BaseTest {
     public void tearDown(ITestResult result) {
         if(ITestResult.FAILURE == result.getStatus()){
             AllureUtils.takeScreenshot(driver);
+        }
+        if(driver !=null){
+            driver.quit();
         }
         driver.quit();
     }
