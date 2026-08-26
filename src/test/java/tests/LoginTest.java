@@ -1,5 +1,8 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -34,7 +37,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyPassword(){
         loginPage.open();
         loginPage.login("standard_user","");
-        assertEquals(loginPage.getErrorMessage(),"Epic sadface: Password is required", "SO BAAAD");
+        assertEquals(loginPage.getErrorMessage(),"Epic sadfac: Password is required", "SO BAAAD");
     }
 
     @Test
@@ -61,9 +64,12 @@ public class LoginTest extends BaseTest {
                 "SO BAAAD");
     }
     @Test
+    @Epic("Авторизация")
+    @Feature("Страница логина")
+    @Story("Позитивный логин")
     public void checkSuccessLogin(){
         loginPage.open();
-        loginPage.login("standard_user","secret_sauce");
+        loginPage.login("standard_user","secret_sauc");
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 }
