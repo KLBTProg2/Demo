@@ -34,7 +34,7 @@ public class BaseTest {
             chromePrefs.put("credentials_enable_service", false);
             chromePrefs.put("profile.password_manager_enable", false);
             options.addArguments("--incognito");
-            options.addArguments("--disable-notification");
+            options.addArguments("--disable-notifications");
             options.addArguments("--disable-extensions");
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-popup-blocking");
