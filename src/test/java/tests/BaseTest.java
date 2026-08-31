@@ -39,13 +39,14 @@ public class BaseTest {
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-popup-blocking");
             options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
             driver = new ChromeDriver(options);
         }else if(browser.equalsIgnoreCase("edge")){
             driver = new EdgeDriver();
         }
         context.setAttribute("driver", driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         softAssert = new SoftAssert();
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
