@@ -37,7 +37,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyPassword(){
         loginPage.open();
         loginPage.login("standard_user","");
-        assertEquals(loginPage.getErrorMessage(),"Epic sadfac: Password is required", "SO BAAAD");
+        assertEquals(loginPage.getErrorMessage(),"Epic sadface: Password is required", "SO BAAAD");
     }
 
     @Test
@@ -69,7 +69,7 @@ public class LoginTest extends BaseTest {
     @Story("Позитивный логин")
     public void checkSuccessLogin(){
         loginPage.open();
-        loginPage.login("standard_user","secret_sauc");
+        loginPage.login("standard_user","secret_sauce");
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 }
