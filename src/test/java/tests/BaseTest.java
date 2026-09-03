@@ -38,7 +38,10 @@ public class BaseTest {
             options.addArguments("--disable-extensions");
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-popup-blocking");
-            options.addArguments("--headless");
+            if(System.getProperty("headless").equals("true")){
+                options.addArguments("--headless");
+            }
+//            options.addArguments("--headless");
             options.addArguments("--window-size=1920,1080");
 
             options.addArguments("--no-sandbox");
